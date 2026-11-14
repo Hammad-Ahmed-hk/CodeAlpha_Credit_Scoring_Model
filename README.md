@@ -20,6 +20,7 @@ CodeAlpha_Credit_Scoring_Model/
 │
 ├── credit_scoring_model_FIXED.ipynb   # Main notebook (full pipeline)
 ├── german_credit_data.csv             # Dataset (with Risk column)
+├── requirements.txt
 ├── outputs/                           # Auto-generated charts
 │   ├── eda_overview.png
 │   ├── eda_categorical.png
@@ -59,7 +60,7 @@ CodeAlpha_Credit_Scoring_Model/
 |-------|-------------|
 | **Logistic Regression** | Linear baseline; interpretable |
 | **Decision Tree** | Non-linear rule-based splits |
-| **Random Forest** | Ensemble method; best performance |
+| **Random Forest** | Ensemble method; best ROC-AUC |
 
 All models use `class_weight='balanced'` to handle the 70/30 class imbalance.
 
@@ -85,26 +86,27 @@ All models use `class_weight='balanced'` to handle the 70/30 class imbalance.
 
 ## 🏆 Results
 
-| Model | Accuracy | F1 (Bad) | ROC-AUC |
-|-------|----------|----------|---------|
-| Logistic Regression | ~0.72 | ~0.60 | ~0.77 |
-| Decision Tree | ~0.70 | ~0.58 | ~0.70 |
-| **Random Forest** | **~0.75** | **~0.62** | **~0.79** |
+Held-out test set of 200 applicants (140 good, 60 bad), numbers taken from the notebook output:
 
-> ✅ **Random Forest** achieved the best overall performance.
+| Model | Accuracy | F1 (Bad) | Recall (Bad) | ROC-AUC |
+|-------|----------|----------|--------------|---------|
+| Logistic Regression | 0.71 | 0.61 | 0.73 | 0.745 |
+| Decision Tree | 0.61 | 0.53 | 0.72 | 0.687 |
+| **Random Forest** | **0.715** | 0.60 | 0.70 | **0.787** |
 
----
+> ✅ **Random Forest** ranks best by ROC-AUC. Logistic Regression is about equal on accuracy and slightly ahead on F1 for the Bad class, so the models are close; with only 200 test rows the differences are small. Treat this as a learning exercise, not a production credit model.
 
 ## 🚀 How to Run
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YourUsername/CodeAlpha_Credit_Scoring_Model.git
+git clone https://github.com/Hammad-Ahmed-hk/CodeAlpha_Credit_Scoring_Model.git
+cd CodeAlpha_Credit_Scoring_Model
 ```
 
 2. Install dependencies:
 ```bash
-pip install pandas numpy scikit-learn matplotlib seaborn
+pip install -r requirements.txt
 ```
 
 3. Open the notebook:
